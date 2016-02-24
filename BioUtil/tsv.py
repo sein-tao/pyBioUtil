@@ -20,7 +20,7 @@ VERSION	0.1
 2015-05-18 10:43:54 CST
 """
 
-from xzopen import xzopen
+from .xz import xzopen
 # from collections import OrderedDict, namedtuple
 from copy import copy, deepcopy
 __all__ = ['tsvFile', 'tsvRecord', '_read_sha_header', '_write_sha_header']

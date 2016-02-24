@@ -16,7 +16,7 @@ import csv
 import types
 import os
 import builtins
-from xzopen import xzopen
+from .xz import xzopen
 from itertools import chain
 from copy import copy, deepcopy
 # import log

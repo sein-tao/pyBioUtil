@@ -3,30 +3,29 @@ BioUtil
 
 This is a collection of scripts and modules for bioinfomatics file access
 
-General file access
+Modules, Classes, and Functions
 -------
 
-xzopen.py
+BioUtil.xzopen()
     access to various compressed files, currently recoganize gzip (.gz), 
     bz2(.bz2), and bgzip(.bgz, .b.gz) from samtools package
 
-tsv.py
+BioUtil.tsv
     tab seperated file with named fields, user could also defined some preprocess
     functions for field reading and writing
 
-Formatted file access
---------
+BioUtil.vcfFile, BioUtil.vcf
+    vcf file access, depends on `PyVCF <https://github.com/jamescasbon/PyVCF>`_,
+    yet provide a convinient and flexable interface
 
-vcf file
-    pyvcf module, which depends on `vcf module <https://github.com/jamescasbon/PyVCF>`_,
-    yet provide a more convinient interface
+BioUtil.samFile, BioUtil.sam
+    sam file access, based on pysam_. 
+    pysam_ also provides interface for tabix (random access tsv file with genome positions),
+    which could be access from BioUtil.sam
+    :: _pysam: https://github.com/pysam-developers/pysam
 
-sam file
-    `pysam module <https://github.com/pysam-developers/pysam>`_. This module
-    also provides interface for tabix (random access tsv file with genome positions)
-
-fasta file
-    `pyfaidx module <https://github.com/mdshw5/pyfaidx>`_
+BioUtil.faidx
+    interface to `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
 
 Dependency
 ------
