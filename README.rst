@@ -18,15 +18,15 @@ Formatted file access
 --------
 
 vcf file
-    pyvcf module, which depends on `vcf module<https://github.com/jamescasbon/PyVCF>`_,
+    pyvcf module, which depends on `vcf module <https://github.com/jamescasbon/PyVCF>`_,
     yet provide a more convinient interface
 
 sam file
-    `pysam module<https://github.com/pysam-developers/pysam>`. This module
+    `pysam module <https://github.com/pysam-developers/pysam>`_. This module
     also provides interface for tabix (random access tsv file with genome positions)
 
 fasta file
-    `pyfaidx module<https://github.com/mdshw5/pyfaidx>`
+    `pyfaidx module <https://github.com/mdshw5/pyfaidx>`_
 
 Dependency
 ------
@@ -38,7 +38,7 @@ Dependency
 
 Authors
 --------
-Yu XU, xuyu@genomics.cn
+Sein Tao
 
 Lisense
 --------
