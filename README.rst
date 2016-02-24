@@ -33,12 +33,12 @@ Dependency
 
 - Python >= 3.4
 - pysam >= 0.8.2
-- vcf >= 0.6.7
+- PyVCF >= 0.6.7
 - pyfaidx >= 0.4.7
 
 Authors
 --------
-Sein Tao
+Yu XU
 
 Lisense
 --------
