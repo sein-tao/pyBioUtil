@@ -23,7 +23,7 @@ class xzFile:
         other suffix as plain text file
     """
     def __new__(cls, file, mode='r', *args, **kargs):
-        return xzopen(file, mode, *args, **kwargs)
+        return xzopen(file, mode, *args, **kargs)
 
 def xzopen(file, mode='r', *args, **kargs):
     "wrapper to construct xzFile object"
