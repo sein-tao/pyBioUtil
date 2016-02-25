@@ -26,7 +26,7 @@ samFile, sam
     .. _pysam: https://github.com/pysam-developers/pysam
 
 faidx
-    interface to `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
+    experimental, interface to `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
 
 Dependency
 ------
