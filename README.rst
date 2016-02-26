@@ -15,7 +15,7 @@ tsvFile, tsvRecord, tsv
     functions for field reading and writing
 
 vcfFile, vcf
-    vcf file access, depends on `PyVCF <https://github.com/jamescasbon/PyVCF>`_,
+    vcf file access, depends on PyVCF_,
     yet provide a convinient and flexable interface
 
 samFile, sam
@@ -23,25 +23,27 @@ samFile, sam
     pysam_ also provides interface for tabix (random access tsv file with genome positions),
     which could be access from BioUtil.sam
 
-    .. _pysam: https://github.com/pysam-developers/pysam
 
 fastaReader
     fetch region sequence from large fasta file. This module is based on faidx 
     through pysam_ pysam.FastaFile.
 
 faidx
-    experimental, interface to `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
+    experimental, interface to pyfaidx_.
 
 Dependency
 ------
 
 - Python >= 3.4
-- pysam >= 0.8.2
-- PyVCF >= 0.6.7
-- pyfaidx >= 0.4.7
+- pysam_ >= 0.8.2
+- PyVCF_ >= 0.6.7
+- pyfaidx_ >= 0.4.7
 
 Change Log
 -------
+
+v0.1.1
+    add fastaReader
 
 v0.1.0
     inital release, support xzFile, tsvFile, vcfFile, samFile and faidx
@@ -55,6 +57,8 @@ Lisense
 --------
 This module is under GPLv2 Lisense 
 
-
     
+.. _pysam: https://github.com/pysam-developers/pysam
+.. _PyVCF: https://github.com/jamescasbon/PyVCF
+.. _pyfaidx: https://github.com/mdshw5/pyfaidx
 

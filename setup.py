@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
         name='BioUtil',
 
-        version='0.1.0',
+        version='0.1.1',
 
         description='Bioinfomatics File access tools',
         long_description=long_description,
@@ -53,7 +53,7 @@ setup(
             ],
 
         # What does your project relate to?
-        keywords='bioinfomatics fasta vcf bam',
+        keywords='bioinfomatics sequencing fileIO',
 
         # You can just specify the packages manually here if your project is
         # simple. Or you can use find_packages().
