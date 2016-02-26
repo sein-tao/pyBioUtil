@@ -25,6 +25,10 @@ samFile, sam
 
     .. _pysam: https://github.com/pysam-developers/pysam
 
+fastaReader
+    fetch region sequence from large fasta file. This module is based on faidx 
+    through pysam_ pysam.FastaFile.
+
 faidx
     experimental, interface to `pyfaidx <https://github.com/mdshw5/pyfaidx>`_
 

@@ -7,12 +7,17 @@ __all__ = ['xzFile', 'xzopen',
 # the order matters to avoid loop
 from .xz import xzFile, xzopen
 from . import xz
+
 from .tsv import tsvFile, tsvRecord
 from . import tsv
+
 from .vcf import vcfFile, vcfReader, vcfWriter, _vcf
 from . import vcf
+
 from pysam import AlignmentFile as samFile
 import pysam as sam
-import pyfaidx as faidx
 
+from .fasta import fastaReader
+
+import pyfaidx as faidx
 
