@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 import unittest
 TestCase = unittest.TestCase
-from BioUtil.fasta import fastaReader
+from BioUtil import fastaReader
 import pysam
 import os
 import logging
 logging.basicConfig(level=logging.ERROR)
 
+print(__file__)
 data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 test_file = os.path.join(data_dir, "test.fasta")
 class TestFastaFileInit(TestCase):

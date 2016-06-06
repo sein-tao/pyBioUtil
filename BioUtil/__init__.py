@@ -6,19 +6,19 @@ __all__ = ['xzFile', 'xzopen',
         'sam', 'samFile', 'faidx']
 # the order matters to avoid loop
 from .xz import xzFile, xzopen
-from . import xz
+# from . import xz
 
 from .tsv import tsvFile, tsvRecord
-from . import tsv
+# from . import tsv
 
 from .vcf import vcfFile, vcfReader, vcfWriter, _vcf
-from . import vcf
+# from . import vcf
 
 from pysam import AlignmentFile as samFile
 import pysam as sam
 
 from .cached_fasta import cachedFasta
-FastaReader=cachedFasta
+fastaReader=cachedFasta
 
 from .fastq import fastqFile, fastqRecord, fastaFile, fastaRecord
 

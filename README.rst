@@ -45,7 +45,7 @@ Dependency
 Change Log
 -------------
 
-v0.1.2
+v0.2
     add fastqFile, rename fastaReader to cachedFasta
 
 v0.1.1
