@@ -17,9 +17,10 @@ from . import vcf
 from pysam import AlignmentFile as samFile
 import pysam as sam
 
-from .fasta import fastaReader
+from .cached_fasta import cachedFasta
+FastaReader=cachedFasta
 
-from .fastq import fastqFile
+from .fastq import fastqFile, fastqRecord, fastaFile, fastaRecord
 
 import pyfaidx as faidx
 

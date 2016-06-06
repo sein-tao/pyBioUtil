@@ -2,10 +2,10 @@
 """fasta file access with buffer"""
 import pysam
 
-class fastaReader:
+class cachedFasta:
     """fasta seq fetcher, use buffer to improve performance
         example: 
-        fa = fastaReader("hg19.fa")
+        fa = cachedFasta("hg19.fa")
         seq = fa['chr1'][2000:3000] 
     """
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """fasta/fastq file IO"""
 from readfq import readfq
-from xz import xzopen
+from xz import xzFile
 import textwrap
 
 default_linewidth = 70
@@ -14,23 +14,26 @@ class fastqRecord:
     def isfa(self):
         return self.qual is None
 
-    def __str__(self):
+    def to_str(self, linewidth=default_linewidth):
         if self.isfa:
             header = '>%s\n' % self.name
-            seq = textwrap.fill(self.seq, default_linewidth)
+            seq = textwrap.fill(self.seq, linewidth)
             return header + seq + "\n"
         else:
             return "@{name}\n{seq}\n+\n{qual}\n".format(self.__dict__)
 
+    def __str__(self):
+        return self.to_str()
+
 class fastqReader:
-    """ fasta/fastq file IO 
+    """ fasta/fastq file reader 
         use readfq.py by lh3
     """
 
     def __init__(self, file, mode='r'):
         self.file = file
         self.fh = xz.open(file, mode)
-        self.iter = readfq(self.fh)
+        self.iter = map(fastqRecord, readfq(self.fh))
 
     def close(self):
         return self.fh.close()
@@ -48,12 +51,20 @@ class fastqReader:
         self.close()
 
 
-class fastqWriter:
-    """ fasta/fastq file IO """
-    def __new__(cls, file, mode='w'):
-        return xzopen(file, mode)
+class fastqWriter (xzFile):
+    """ fasta/fastq file writer """
+    def __init__(self, file, mode='w', linewidth=default_linewidth):
+        super(self.__class__, self).__init__(file, mode)
+        self.linewidth = linewidth
+
+    def write(self, rec):
+        if not isinstance(rec, fastqRecord):
+            raise TypeError()
+        super(self.__class__, self).write(rec.to_str(self.linewidth))
+
 
 class fastqFile:
+    """ fasta/fastq file IO """
     def __new__(cls, file, mode='r'):
         if 'r' in mode:
             return fastqReader(file, mode)
@@ -62,3 +73,5 @@ class fastqFile:
         else:
             raise ValueError("Invalid mode: %s" % mode)
 
+fastaFile = fastqFile
+fastaRecord = fastqRecord
