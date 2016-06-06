@@ -4,7 +4,7 @@ BioUtil
 This is a collection of scripts and modules for bioinfomatics file access
 
 Modules, Classes, and Functions
--------
+---------------------------------
 
 xzFile, xzopen()
     access to various compressed files, currently recoganize gzip (.gz), 
@@ -32,7 +32,7 @@ faidx
     experimental, interface to pyfaidx_.
 
 Dependency
-------
+------------
 
 - Python >= 3.4
 - pysam_ >= 0.8.2
@@ -40,7 +40,7 @@ Dependency
 - pyfaidx_ >= 0.4.7
 
 Change Log
--------
+-------------
 
 v0.1.1
     add fastaReader

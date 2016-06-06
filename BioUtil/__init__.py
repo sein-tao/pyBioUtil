@@ -19,5 +19,7 @@ import pysam as sam
 
 from .fasta import fastaReader
 
+from .fastq import fastqFile
+
 import pyfaidx as faidx
 
