@@ -10,15 +10,19 @@ __all__ = [ 'fastqRecord', 'fastqFile', 'fastaRecord', 'fastaFile',
 
 default_linewidth = 70
 class fastqRecord:
+    "a fastq/fasta Record"
     def __init__(self, name, seq, qual=None):
         self.name = name
         self.seq = seq
         self.qual = qual
     @property
     def isfa(self):
+        "boolean, True for fasta, False for fastq"
         return self.qual is None
 
     def to_str(self, linewidth=default_linewidth):
+        "covert record to string, without newline character on last line
+        linewidth only affect the output of fasta"
         if self.isfa:
             header = '>%s\n' % self.name
             seq = textwrap.fill(self.seq, linewidth)
@@ -28,6 +32,10 @@ class fastqRecord:
 
     def __str__(self):
         return self.to_str()
+
+    def __len__(self):
+        "get length of seq"
+        return len(self.seq)
 
 class fastqReader:
     """ fasta/fastq file reader 
@@ -62,14 +70,17 @@ class fastqWriter (xzFile):
         self.linewidth = linewidth
 
     def write(self, rec):
+        "write record, automately ends with newline"
         if not isinstance(rec, fastqRecord):
             raise TypeError()
         super(self.__class__, self).write(rec.to_str(self.linewidth))
+        super(self.__class__, self).write("\n")
 
 
 class fastqFile:
     """ fasta/fastq file IO """
     def __new__(cls, file, mode='r', *args, **kwargs):
+        "construct fastqFile for I/O"
         if 'r' in mode:
             return fastqReader(file, mode, *args, **kwargs)
         elif 'w' in mode:

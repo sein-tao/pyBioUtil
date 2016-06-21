@@ -3,7 +3,7 @@ __version__ =  get_distribution('BioUtil').version
 __all__ = ['xzFile', 'xzopen', 
         'tsv', 'tsvFile', 'tsvRecord',
         'vcf', 'vcfFile', 'vcfReader', 'vcfWriter', 
-        'sam', 'samFile', 
+        'samFile', 
         'fastaFile', 'fastqFile', 'fastaRecord', 'FastqRecord',
         'cachedFasta', 'faidx',
         ]
