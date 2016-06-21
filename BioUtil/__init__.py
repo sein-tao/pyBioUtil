@@ -3,7 +3,10 @@ __version__ =  get_distribution('BioUtil').version
 __all__ = ['xzFile', 'xzopen', 
         'tsv', 'tsvFile', 'tsvRecord',
         'vcf', 'vcfFile', 'vcfReader', 'vcfWriter', 
-        'sam', 'samFile', 'faidx']
+        'sam', 'samFile', 
+        'fastaFile', 'fastqFile', 'fastaRecord', 'FastqRecord',
+        'cachedFasta', 'faidx',
+        ]
 # the order matters to avoid loop
 from .xz import xzFile, xzopen
 # from . import xz
