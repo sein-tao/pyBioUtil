@@ -69,12 +69,20 @@ class fastqWriter (xzFile):
         super(self.__class__, self).__init__(file, mode)
         self.linewidth = linewidth
 
+    def __enter__(self):
+        return self
+
     def write(self, rec):
         "write record, automately ends with newline"
-        if not isinstance(rec, fastqRecord):
-            raise TypeError()
-        super(self.__class__, self).write(rec.to_str(self.linewidth))
-        super(self.__class__, self).write("\n")
+        print(dir(super(self.__class__, self)))
+        print(getattr(xzFile, 'write')(self, rec))
+        if isinstance(rec, str): # for print
+            super(self.__class__, self).write(rec)
+        elif isinstance(rec, fastqRecord):
+            super(self.__class__, self).write(rec.to_str(self.linewidth))
+            super(self.__class__, self).write("\n")
+        else:
+            raise TypeError("%s for fastqWriter" % type(rec))
 
 
 class fastqFile:

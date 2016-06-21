@@ -40,6 +40,13 @@ class TestFastq(TestCase):
         gold = readfile(self.test_fq)
         result = readfile(self.tmp_fq)
         self.assertEqual(gold, result)
+    def test_fastq_write(self):
+        with fastqFile(self.tmp_fq, 'w') as out, fastqFile(self.test_fq) as input:
+            for rec in input:
+                out.write(rec)
+        gold = readfile(self.test_fq)
+        result = readfile(self.tmp_fq)
+        self.assertEqual(gold, result)
 
 
 

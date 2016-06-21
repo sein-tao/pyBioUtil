@@ -22,11 +22,44 @@ class xzFile:
         '.bz2' for bz2, '.bgz' or '.b.gz' for bgzip,
         other suffix as plain text file
     """
-    def __new__(cls, file, mode='r', *args, **kargs):
-        return xzopen(file, mode, *args, **kargs)
+    def __init__(self, file, mode='r', *args, **kwargs):
+        self.fh = None
+        self.open(file, mode, *args,  **kwargs)
 
-def xzopen(file, mode='r', *args, **kargs):
+    def __enter__(self):
+        try:
+            return self.fh.__enter__()
+        except AttributeError:
+            return self.fh
+
+    def __exit__(self, type, value, traceback):
+        try:
+            return self.fh.__exit__(type, value, traceback)
+        except AttributeError:
+            try:
+                self.fh.close()
+            finally:
+                return
+
+    def __iter__(self):
+        return iter(self.fh)
+
+
+    def __next__(self):
+        return next(self.fh)
+
+    def open(self, file, mode='r', *args, **kwargs):
+        self.fh = _xzopen(file, mode, *args, **kwargs)
+
+    def __getattr__(self, attr):
+        return getattr(self.fh, attr)
+
+def xzopen(file, mode='r', *args, **kwargs):
     "wrapper to construct xzFile object"
+    return xzFile(file, mode, *args, **kwargs)
+
+def _xzopen(file, mode='r', *args, **kargs):
+    "construct an IO stream"
     if file == '-':
         if 'w' in mode:
             return sys.stdout
