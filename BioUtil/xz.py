@@ -52,6 +52,9 @@ class xzFile:
         self.fh = _xzopen(file, mode, *args, **kwargs)
 
     def __getattr__(self, attr):
+        """Caution for subclassing: call self.fh.method instead of super().method"""
+        # as __getattr__ were not called by super()
+        # ref: http://stackoverflow.com/questions/12047847/super-object-not-calling-getattr
         return getattr(self.fh, attr)
 
 def xzopen(file, mode='r', *args, **kwargs):
