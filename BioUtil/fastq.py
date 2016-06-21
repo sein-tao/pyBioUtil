@@ -21,8 +21,8 @@ class fastqRecord:
         return self.qual is None
 
     def to_str(self, linewidth=default_linewidth):
-        "covert record to string, without newline character on last line
-        linewidth only affect the output of fasta"
+        """covert record to string, without newline character on last line
+        linewidth only affect the output of fasta"""
         if self.isfa:
             header = '>%s\n' % self.name
             seq = textwrap.fill(self.seq, linewidth)
