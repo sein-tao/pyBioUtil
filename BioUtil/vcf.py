@@ -19,6 +19,7 @@ import builtins
 from .xz import xzopen
 from itertools import chain
 from copy import copy, deepcopy
+from .decorator import context_decorator
 # import log
 # log.basicConfig(level=log.DEBUG)
 
@@ -27,6 +28,8 @@ __all__ = ['vcfFile', 'open', 'vcfWriter', 'vcfReader']
 _vcf = vcf
 _Reader = vcf.Reader
 _Writer = vcf.Writer
+
+
 
 class vcfFile(object):
     def __new__(cls, file, mode='r', template=None, prepend_chr=False):
@@ -51,6 +54,7 @@ def _read_header(self, header, template):
         header_fh.close()
     return template
 
+@context_decorator
 class vcfReader(vcf.Reader):
     def __init__(self, file=None, header=None, fsock=None, 
              template=None,  **kwargs):
@@ -77,6 +81,7 @@ class vcfReader(vcf.Reader):
             pass
 
 
+@context_decorator
 class vcfWriter(vcf.Writer):
     def __init__(self, file=None, header=None, fsock=None, 
              template=None, write_header = True, **kwargs):

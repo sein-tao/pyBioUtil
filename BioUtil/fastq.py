@@ -6,9 +6,9 @@ import textwrap
 from itertools import starmap
 
 __all__ = [ 'fastqRecord', 'fastqFile', 'fastaRecord', 'fastaFile',
-        'default_linewidth']
+        'fastqReader', 'fastqWriter', 'default_linewidth']
 
-default_linewidth = 70
+default_linewidth = 100
 class fastqRecord:
     "a fastq/fasta Record"
     def __init__(self, name, seq, qual=None):
@@ -66,6 +66,7 @@ class fastqReader:
 class fastqWriter (xzFile):
     """ fasta/fastq file writer """
     def __init__(self, file, mode='w', linewidth=default_linewidth):
+        "init. notice that linewidth only affect fa records"
         super(self.__class__, self).__init__(file, mode)
         self.linewidth = linewidth
 
@@ -85,12 +86,12 @@ class fastqWriter (xzFile):
 
 class fastqFile:
     """ fasta/fastq file IO """
-    def __new__(cls, file, mode='r', *args, **kwargs):
+    def __new__(cls, file, mode='r', linewidth=default_linewidth, *args, **kwargs):
         "construct fastqFile for I/O"
         if 'r' in mode:
             return fastqReader(file, mode, *args, **kwargs)
         elif 'w' in mode:
-            return fastqWriter(file, mode, *args, **kwargs)
+            return fastqWriter(file, mode, linewidth, *args, **kwargs)
         else:
             raise ValueError("Invalid mode: %s" % mode)
 

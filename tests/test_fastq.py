@@ -26,9 +26,11 @@ class TestFastq(TestCase):
         os.remove(self.tmp_fq)
 
     def test_fasta(self):
-        with fastqFile(self.tmp_fa, 'w') as out, fastqFile(self.test_fa) as input:
+        with fastqFile(self.tmp_fa, 'w', linewidth=70) as out, fastqFile(self.test_fa) as input:
             for rec in  input:
-                print(rec, file=out)
+                # print(rec, file=out)
+                out.write(rec)
+        #gold_file = os.path.join(data_dir, "test.100.fa") 
         gold_file = self.test_fa
         gold = readfile(gold_file)
         result = readfile(self.tmp_fa)
