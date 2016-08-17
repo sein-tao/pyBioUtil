@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 This module serves as a wrapper for vcf module [https://github.com/jamescasbon/PyVCF]
 open() and vcfFile class is for directly init of vcf file object,

@@ -74,8 +74,9 @@ def _xzopen(file, mode='r', *args, **kargs):
             mode += 't'
 
     if file.endswith('.bgz') or file.endswith('.b.gz'):
-        import bgzip
-        return bgzip.open(file, mode, *args, **kargs)
+        # import bgzip
+        from .bgzip import open as bgzip_open
+        return bgzip_open(file, mode, *args, **kargs)
     elif file.endswith('.gz'):
         import gzip
         return gzip.open(file, mode, *args, **kargs)
