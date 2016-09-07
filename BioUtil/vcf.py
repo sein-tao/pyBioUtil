@@ -28,6 +28,8 @@ __all__ = ['vcfFile', 'open', 'vcfWriter', 'vcfReader']
 _vcf = vcf
 _Reader = vcf.Reader
 _Writer = vcf.Writer
+Record=vcf.model._Record
+Call=vcf.model._Call
 
 
 
