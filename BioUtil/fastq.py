@@ -10,7 +10,8 @@ __all__ = [ 'fastqRecord', 'fastqFile', 'fastaRecord', 'fastaFile',
 
 default_linewidth = 100
 class fastqRecord:
-    "a fastq/fasta Record"
+    """a fastq/fasta Record.
+    Attibutes: name, seq, qual"""
     def __init__(self, name, seq, qual=None):
         self.name = name
         self.seq = seq

@@ -23,6 +23,7 @@ VERSION	0.1
 from .xz import xzopen
 # from collections import OrderedDict, namedtuple
 from copy import copy, deepcopy
+import shlex
 __all__ = ['tsvFile', 'tsvRecord', '_read_sha_header', '_write_sha_header']
 
 class tsvFile(object):
@@ -88,7 +89,8 @@ class tsvRecord(object):
         elif isinstance(rec, list) or isinstance(rec, tuple):
             parser = lambda k: cls._fields_parser.get(k, lambda x:x)
             if len(rec) != len(cls._fields):
-                raise ValueError("field number not match, line:\n" + "\t".join(rec))
+                raise ValueError("field number not match (%s provide, %s needed). " %(len(rec), len(cls._fields)) + 
+                        "line:\n" + "\t".join(map(shlex.quote, rec)) )
             for i, k in enumerate(cls._fields):
                 setattr(self, k, parser(k)(rec[i]) )
         elif isinstance(rec, dict):
