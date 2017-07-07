@@ -6,9 +6,8 @@ import textwrap
 from itertools import starmap
 
 __all__ = [ 'fastqRecord', 'fastqFile', 'fastaRecord', 'fastaFile',
-        'fastqReader', 'fastqWriter', 'default_linewidth']
+        'fastqReader', 'fastqWriter']
 
-default_linewidth = 100
 class fastqRecord:
     """a fastq/fasta Record.
     Attibutes: name, seq, qual"""
@@ -90,7 +89,7 @@ class fastqWriter (xzFile):
 
 class fastqFile:
     """ fasta/fastq file IO """
-    def __new__(cls, file, mode='r', linewidth=default_linewidth, *args, **kwargs):
+    def __new__(cls, file, mode='r', linewidth=None, *args, **kwargs):
         "construct fastqFile for I/O"
         if 'r' in mode:
             return fastqReader(file, mode, *args, **kwargs)
