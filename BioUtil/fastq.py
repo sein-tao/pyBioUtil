@@ -21,12 +21,15 @@ class fastqRecord:
         "boolean, True for fasta, False for fastq"
         return self.qual is None
 
-    def to_str(self, linewidth=default_linewidth):
+    def to_str(self, linewidth=None):
         """covert record to string, without newline character on last line
         linewidth only affect the output of fasta"""
         if self.isfa:
             header = '>%s\n' % self.name
-            seq = textwrap.fill(self.seq, linewidth)
+            if linewidth is None:
+                seq = self.seq
+            else:
+                seq = textwrap.fill(self.seq, linewidth)
             return header + seq
         else:
             return "@{name}\n{seq}\n+\n{qual}".format_map(self.__dict__)
@@ -66,8 +69,8 @@ class fastqReader:
 
 class fastqWriter (xzFile):
     """ fasta/fastq file writer """
-    def __init__(self, file, mode='w', linewidth=default_linewidth):
-        "init. notice that linewidth only affect fa records"
+    def __init__(self, file, mode='w', linewidth=None):
+        """init writer. linewidth only affect fa records, set to None mean one line"""
         super(self.__class__, self).__init__(file, mode)
         self.linewidth = linewidth
 
