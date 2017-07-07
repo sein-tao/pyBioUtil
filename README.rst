@@ -45,6 +45,9 @@ Dependency
 Change Log
 -------------
 
+v0.3
+    change fasta/fastq Writter methods
+
 v0.2
     add fastqFile, rename fastaReader to cachedFasta
 

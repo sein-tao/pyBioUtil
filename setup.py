@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
         name='BioUtil',
 
-        version='0.2.0',
+        version='0.3.0',
 
         description='Bioinfomatics File access tools',
         long_description=long_description,
