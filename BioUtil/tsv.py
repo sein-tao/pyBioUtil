@@ -23,12 +23,18 @@ VERSION	0.1
 from .xz import xzopen
 # from collections import OrderedDict, namedtuple
 from copy import copy, deepcopy
+import abc
 import shlex
 __all__ = ['tsvFile', 'tsvRecord', '_read_sha_header', '_write_sha_header']
 
-class tsvFile(object):
-    Record = None
-    def __init__(self, file, mode='r', template=None): 
+class tsvFile(abc.ABC):
+    @abc.abstractproperty
+    def Record(self):
+        """Record type for this File"""
+        return
+    def __init__(self, file, mode='r', template=None):
+        # if self.__class__.Record is None:
+        #     raise ValueError("Record class is not defined")
         self.filename = file
         if mode in ('r','w'):
             self.mode = mode
@@ -44,7 +50,7 @@ class tsvFile(object):
             self.header = deepcopy(template.header)
         if mode == 'w':
             self._write_header()
-    
+
     @classmethod
     def open(cls, file, mode='r', template=None):
         return cls(file, mode, template)
@@ -60,12 +66,11 @@ class tsvFile(object):
 
     def __next__(self):
         "read the next record"
-        return self.Record(next(self._fh).rstrip("\n").split("\t"))
+        return self.Record.from_str(next(self._fh))
 
     def write(self, record):
         "write a record"
         self._fh.write(record.to_str())
-        self._fh.write("\n")
 
     def _read_header(self):
         pass
@@ -76,14 +81,30 @@ class tsvFile(object):
     def close(self):
         return self._fh.close()
 
-class tsvRecord(object):
-    _fields = tuple()
+class tsvRecord(abc.ABC):
+    """ base class for tsv file lines as a `record`
+    _fields must be defined by subclass
+    _fields_{parser,encoder,default} could be defined optionally
+    each filed is stored as an attribute of the class
+    """
+
+    @abc.abstractproperty
+    def _fields(self):
+        """ fileds names for record """
+        return tuple()
     _fields_parser = dict()
     _fields_encoder= dict()
     _fields_default= dict()
+    _delim = "\t"
+    _newline = "\n"
 
     def __init__(self, rec):
+        """ init a tsvRecord
+        :param rec: the value for init, could be a list/tuple/dict or another record
+        """
         cls = self.__class__
+        if len(cls._fields) == 0:
+            raise ValueError("Record fields not defined.")
         if rec is None:
             pass
         elif isinstance(rec, list) or isinstance(rec, tuple):
@@ -97,13 +118,18 @@ class tsvRecord(object):
             for k, v in rec.iteritems():
                 setattr(self, k, v)
         elif isinstance(rec, tsvRecord):
-            for k in set(rec._fields).intersect(set(cls._fileds)):
+            for k in set(rec._fields).intersection(set(cls._fileds)):
                 setattr(self, k, rec.k)
         else:
             raise ValueError("Unknown argument type")
     def to_str(self):
-        return "\t".join(self._fields_encoder.get(attr,str)(getattr(self, attr)) 
-                for attr in self._fields)
+        return self._delim.join(self._fields_encoder.get(attr,str)(getattr(self, attr)) 
+                for attr in self._fields) + self._newline
+
+    @classmethod
+    def from_str(cls, string):
+        "init Record from one line in the file"
+        return cls(string[:-len(cls._newline)].split(cls._delim))
 
     def __getattr__(self, attr):
         try:
