@@ -87,10 +87,8 @@ class fastqWriter (xzFile):
             raise TypeError("%s for fastqWriter" % type(rec))
 
 
-class fastqFile:
-    """ fasta/fastq file IO """
-    def __new__(cls, file, mode='r', linewidth=None, *args, **kwargs):
-        "construct fastqFile for I/O"
+def fastqFile(file, mode='r', linewidth=None, *args, **kwargs):
+        "construct fastq Reader/Writer for I/O"
         if 'r' in mode:
             return fastqReader(file, mode, *args, **kwargs)
         elif 'w' in mode:

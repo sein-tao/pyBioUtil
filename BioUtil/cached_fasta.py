@@ -82,6 +82,7 @@ class _chrFetcher:
         self.database = genome
         self.chr = chr
         self.chr_len = genome.ref_len[chr]
+        self.size = self.chr_len
         self.buffer = genome.buffer
         self.trans = genome.trans
     def __getitem__(self, key):
@@ -102,6 +103,8 @@ class _chrFetcher:
         return self.trans(self.buffer[key])
     def fetch(self, start, end):
         return self[start:end]
+    def __len__(self):
+        return self.chr_len
 
 class _seqBuffer:
     def __init__(self, fa, buffer_size):

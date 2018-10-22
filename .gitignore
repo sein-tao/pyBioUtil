@@ -1,6 +1,9 @@
 # self defined
 .history
 install_test/
+*~
+.*.un~
+gmon.out
 
 
 # Byte-compiled / optimized / DLL files
