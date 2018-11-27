@@ -1,11 +1,12 @@
 from pkg_resources import get_distribution
 __version__ =  get_distribution('BioUtil').version
-__all__ = ['xzFile', 'xzopen', 
+__all__ = ['xzFile', 'xzopen',
         'tsv', 'tsvFile', 'tsvRecord',
-        'vcf', 'vcfFile', 'vcfReader', 'vcfWriter', 
-        'samFile', 
-        'fastaFile', 'fastqFile', 'fastaRecord', 'FastqRecord',
+        'vcf', 'vcfFile', 'vcfReader', 'vcfWriter',
+        'samFile',
+        'fastaFile', 'fastqFile', 'fastaRecord', 'fastqRecord',
         'cachedFasta', 'faidx',
+        'log'
         ]
 # the order matters to avoid loop
 from .xz import xzFile, xzopen
@@ -27,3 +28,4 @@ from .fastq import fastqFile, fastqRecord, fastaFile, fastaRecord
 
 import pyfaidx as faidx
 
+from . import log
