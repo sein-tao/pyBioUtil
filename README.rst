@@ -45,6 +45,9 @@ Dependency
 Change Log
 -------------
 
+v0.4
+    add logger class 
+
 v0.3
     change fasta/fastq Writter methods
 
@@ -60,7 +63,7 @@ v0.1.0
 
 Authors
 --------
-Yu XU
+Yu XU <xuyu@genomics.cn>
 
 Lisense
 --------

@@ -3,6 +3,7 @@
 install_test/
 *~
 .*.un~
+.*.swp
 gmon.out
 
 

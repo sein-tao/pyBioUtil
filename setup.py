@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
         name='BioUtil',
 
-        version='0.3.0',
+        version='0.4.0',
 
         description='Bioinfomatics File access tools',
         long_description=long_description,
@@ -50,6 +50,8 @@ setup(
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.4',
             'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
             ],
 
         # What does your project relate to?
